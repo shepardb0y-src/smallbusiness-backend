@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +41,23 @@ public class UsersControllers {
 	@PostMapping("adduser")
 	public User newStudent(@RequestBody User user) {
 		return userRepo.save(user);
+	}
+	@PutMapping("user/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User newUserInfo) {
+		User foundUser = userRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Student not found."));
+		
+//		Update info of found student using setters with the new info from req.body using getters.
+		foundUser.setFirstname(newUserInfo.getFirstname());
+		foundUser.setLastname(newUserInfo.getLastname());
+		foundUser.setStreetname(newUserInfo.getStreetname());
+		foundUser.setState(newUserInfo.getState());
+		foundUser.setZipcode(newUserInfo.getZipcode());
+		foundUser.setComments(newUserInfo.getComments());
+		
+		User updatedUser = userRepo.save(foundUser);
+		
+		return ResponseEntity.ok(updatedUser);
 	}
 	
 	@DeleteMapping("user/{id}")
