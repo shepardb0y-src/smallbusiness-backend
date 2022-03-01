@@ -1,4 +1,4 @@
-package com.fabiobenoit.controllers;
+package com.fabiobenoit.backend.controllers;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ import com.fabiobenoit.backend.repositories.UserRepository;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/")
-public class UsersController {
+public class UsersControllers {
+
 	@Autowired
-	private UserRepository usersRepo;
+	private UserRepository userRepo;
 	
 	@GetMapping("allusers")
 	public List<User> getAllStudents() {
 //		You can pass on some sorting logic inside findAll() 
-		return usersRepo.findAll();
+		return userRepo.findAll();
 	}
-	
 }
