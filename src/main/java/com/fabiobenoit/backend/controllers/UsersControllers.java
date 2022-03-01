@@ -26,15 +26,20 @@ public class UsersControllers {
 	
 	@GetMapping("allusers")
 	public List<User> getAllUsers() {
-
 		return userRepo.findAll();
 	}
-
-
 	@GetMapping("user/{id}")
 	public ResponseEntity<User> getStudentById(@PathVariable int id) {
 		User user = userRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Student not found."));
 				return ResponseEntity.ok(user);
 }
+	
+	@PostMapping("adduser")
+	public User newStudent(@RequestBody User user) {
+		return userRepo.save(user);
+	}
+	
+
+	
 }
