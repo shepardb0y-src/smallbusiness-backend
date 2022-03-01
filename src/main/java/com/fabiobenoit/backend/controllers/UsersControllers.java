@@ -3,8 +3,10 @@ package com.fabiobenoit.backend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +42,17 @@ public class UsersControllers {
 		return userRepo.save(user);
 	}
 	
-
+	@DeleteMapping("user/{id}")
+	public ResponseEntity<String> deleteUser(@PathVariable int id) {
+//		Find user we want to delete
+		userRepo.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("User not found."));
+		
+		String message =  "User has been deleted.";
+		
+//		Delete method from Jpa. Deletes entity from database.
+		userRepo.deleteById(id);
+		return new ResponseEntity<>(message, HttpStatus.OK);
+	}
 	
 }
