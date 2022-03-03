@@ -48,14 +48,18 @@ public class ClientsControllers {
 	public ResponseEntity<Client> updateUser(@PathVariable int id, @RequestBody Client newClientInfo) {
 		Client foundClient = clientRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Client not found."));
-		
-//		Update info of found student using setters with the new info from req.body using getters.
 		foundClient.setUsername(newClientInfo.getUsername());
-
 		Client updatedClient = clientRepo.save(foundClient);
-		
 		return ResponseEntity.ok(updatedClient);
 	}
-	
+	@DeleteMapping("client/{id}")
+	public ResponseEntity<String> deleteUser(@PathVariable int id) {
+
+		clientRepo.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Client not found."));	
+		String message =  "Client has been deleted.";
+		clientRepo.deleteById(id);
+		return new ResponseEntity<>(message, HttpStatus.OK);
+	}
 	
 }
