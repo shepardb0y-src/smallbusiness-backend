@@ -6,11 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+@Entity
+	@Table(name="clients")
 public class Client {
-	@Entity
-	@Table(name="classes")
-	public class User {
+	
+	
 		@Id
 		@Column
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,4 +28,5 @@ public class Client {
 			this.username = username;
 		}
 }
-}
+
+	
