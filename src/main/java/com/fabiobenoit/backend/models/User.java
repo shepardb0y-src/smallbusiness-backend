@@ -51,7 +51,7 @@ public class User {
 	public String getStateLocation() {
 		return stateLocation;
 	}
-	public void setStateLocation(String state) {
+	public void setStateLocation(String stateLocation) {
 		this.stateLocation = stateLocation;
 	}
 	public String getZipcode() {
