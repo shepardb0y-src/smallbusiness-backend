@@ -21,7 +21,7 @@ public class User {
 	@Column
 	private String streetname;
 	@Column
-	private String state;
+	private String stateLocation;
 	@Column
 	private String zipcode;
 	@Column
@@ -48,11 +48,11 @@ public class User {
 	public void setStreetname(String streetname) {
 		this.streetname = streetname;
 	}
-	public String getState() {
-		return state;
+	public String getStateLocation() {
+		return stateLocation;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setStateLocation(String state) {
+		this.stateLocation = stateLocation;
 	}
 	public String getZipcode() {
 		return zipcode;

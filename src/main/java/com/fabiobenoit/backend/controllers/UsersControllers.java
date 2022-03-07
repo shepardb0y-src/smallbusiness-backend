@@ -34,7 +34,7 @@ public class UsersControllers {
 	@GetMapping("user/{id}")
 	public ResponseEntity<User> getStudentById(@PathVariable int id) {
 		User user = userRepo.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Student not found."));
+				.orElseThrow(() -> new ResourceNotFoundException("Users not found."));
 				return ResponseEntity.ok(user);
 }
 	
@@ -45,13 +45,13 @@ public class UsersControllers {
 	@PutMapping("user/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User newUserInfo) {
 		User foundUser = userRepo.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Student not found."));
+				.orElseThrow(() -> new ResourceNotFoundException("Users not found."));
 		
 //		Update info of found student using setters with the new info from req.body using getters.
 		foundUser.setFirstname(newUserInfo.getFirstname());
 		foundUser.setLastname(newUserInfo.getLastname());
 		foundUser.setStreetname(newUserInfo.getStreetname());
-		foundUser.setState(newUserInfo.getState());
+		foundUser.setStateLocation(newUserInfo.getStateLocation());
 		foundUser.setZipcode(newUserInfo.getZipcode());
 		foundUser.setComments(newUserInfo.getComments());
 		
